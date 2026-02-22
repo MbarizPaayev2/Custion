@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sec+AI - Security+ Learning Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <button class="new-chat-btn" onclick="location.reload()">
+                ➕ Yeni Söhbət
+            </button>
+            <div class="sidebar-title">Son Söhbətlər</div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="chat-header">
+                <div class="header-left">
+                    <div class="logo">Sec+AI</div>
+                    <div class="model-badge">Gemini 2.5 Flash</div>
+                </div>
+            </header>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-wrapper">
+                        <div class="message-header">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <p>Salam! Mən <strong>Sec+AI</strong> - Security+ öyrənmə köməkçisiyəm.</p>
+                                <p>İngilis dilində Security+ texniki mətn göndərin, mən sizə kömək edəcəm:</p>
+                                <ul>
+                                    <li>🇦🇿 Azərbaycan dilinə tərcümə</li>
+                                    <li>📚 Texniki terminlərin sadə izahları</li>
+                                    <li>💡 Mövzunun qısa xülasəsi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Security+ mətni daxil edin..."
+                        rows="1"
+                    ></textarea>
+                    <button id="sendBtn" onclick="sendMessage()">
+                        <span id="sendIcon">↑</span>
+                        <span id="sendLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
