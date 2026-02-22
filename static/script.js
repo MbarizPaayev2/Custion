@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = window.location.origin;
 
 async function sendMessage() {
     const messageInput = document.getElementById('messageInput');
