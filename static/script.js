@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = window.location.origin;
 
 async function sendMessage() {
     const messageInput = document.getElementById('messageInput');
@@ -16,11 +16,11 @@ async function sendMessage() {
     
     // Disable send button
     const sendBtn = document.getElementById('sendBtn');
-    const sendIcon = document.getElementById('sendIcon');
+    const sendLabel = document.getElementById('sendLabel');
     const sendLoader = document.getElementById('sendLoader');
     
     sendBtn.disabled = true;
-    sendIcon.style.display = 'none';
+    sendLabel.style.display = 'none';
     sendLoader.style.display = 'block';
 
     try {
@@ -44,27 +44,24 @@ async function sendMessage() {
     } finally {
         // Reset button
         sendBtn.disabled = false;
-        sendIcon.style.display = 'block';
+        sendLabel.style.display = 'block';
         sendLoader.style.display = 'none';
     }
 }
 
 function addUserMessage(text) {
     const chatMessages = document.getElementById('chatMessages');
-    
+
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message user-message';
     messageDiv.innerHTML = `
         <div class="message-wrapper">
-            <div class="message-header">
-                <div class="message-avatar">👤</div>
-                <div class="message-content">
-                    <p>${escapeHtml(text)}</p>
-                </div>
+            <div class="message-content">
+                <p>${escapeHtml(text)}</p>
             </div>
         </div>
     `;
-    
+
     chatMessages.appendChild(messageDiv);
     scrollToBottom();
 }
@@ -91,30 +88,27 @@ function addBotResponse(data) {
     
     messageDiv.innerHTML = `
         <div class="message-wrapper">
-            <div class="message-header">
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">
+            <div class="message-content">
                     <div class="result-section">
-                        <h3>🇦🇿 Azərbaycan Tərcüməsi</h3>
+                        <h3>Azərbaycan tərcüməsi</h3>
                         <p class="result-text">${escapeHtml(data.az_translation)}</p>
                     </div>
                     
                     ${data.vocabulary_list.length > 0 ? `
                     <div class="result-section">
-                        <h3>📚 Lüğət (A2 Səviyyə)</h3>
+                        <h3>Lüğət (A2 səviyyə)</h3>
                         ${vocabularyHtml}
                         <p class="word-count">Naməlum söz sayı: <span>${data.unknown_words_count}</span></p>
                     </div>
                     ` : ''}
                     
                     <div class="result-section">
-                        <h3>💡 Mini Qeyd</h3>
+                        <h3>Mini qeyd</h3>
                         <div class="mini-note">
                             <p class="result-text">${escapeHtml(data.security_plus_mini_note)}</p>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     `;
     
