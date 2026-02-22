@@ -8,37 +8,28 @@
 </head>
 <body>
     <div class="chat-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
-            <button class="new-chat-btn" onclick="location.reload()">
-                ➕ Yeni Söhbət
-            </button>
-            <div class="sidebar-title">Son Söhbətlər</div>
+            <button class="new-chat-btn" onclick="location.reload()">Yeni söhbət</button>
+            <div class="sidebar-title">Son söhbətlər</div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <header class="chat-header">
-                <div class="header-left">
-                    <div class="logo">Sec+AI</div>
-                    <div class="model-badge">Gemini 2.5 Flash</div>
-                </div>
+                <div class="logo">Sec+AI</div>
+                <div class="model-badge">Gemini 2.5 Flash</div>
             </header>
 
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot-message">
                     <div class="message-wrapper">
-                        <div class="message-header">
-                            <div class="message-avatar">🤖</div>
-                            <div class="message-content">
-                                <p>Salam! Mən <strong>Sec+AI</strong> - Security+ öyrənmə köməkçisiyəm.</p>
-                                <p>İngilis dilində Security+ texniki mətn göndərin, mən sizə kömək edəcəm:</p>
-                                <ul>
-                                    <li>🇦🇿 Azərbaycan dilinə tərcümə</li>
-                                    <li>📚 Texniki terminlərin sadə izahları</li>
-                                    <li>💡 Mövzunun qısa xülasəsi</li>
-                                </ul>
-                            </div>
+                        <div class="message-content">
+                            <p><strong>Sec+AI</strong> Security+ öyrənməniz üçün köməkçidir.</p>
+                            <p>İngilis dilində Security+ mətn göndərin. Sizə aşağıdakı formatda cavab verəcəyəm:</p>
+                            <ul>
+                                <li>Azərbaycan dilinə tərcümə</li>
+                                <li>Terminlər üçün sadə izah</li>
+                                <li>Mövzunun qısa qeydi</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -46,13 +37,13 @@
 
             <div class="chat-input-container">
                 <div class="input-wrapper">
-                    <textarea 
-                        id="messageInput" 
-                        placeholder="Security+ mətni daxil edin..."
+                    <textarea
+                        id="messageInput"
+                        placeholder="Security+ mətnini daxil edin..."
                         rows="1"
                     ></textarea>
-                    <button id="sendBtn" onclick="sendMessage()">
-                        <span id="sendIcon">↑</span>
+                    <button id="sendBtn" onclick="sendMessage()" aria-label="Göndər">
+                        <span id="sendLabel">Göndər</span>
                         <span id="sendLoader" class="loader" style="display: none;"></span>
                     </button>
                 </div>
