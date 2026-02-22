@@ -2,9 +2,9 @@
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 import logging
+import os
 from schemas import AnalysisRequest, AnalysisResponse
 from services import text_analysis_service
 
@@ -23,9 +23,12 @@ app = FastAPI(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # CORS middleware
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "*")
+origins = [origin.strip() for origin in allowed_origins.split(",") if origin.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins or ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -70,8 +73,7 @@ async def analyze_text(request: AnalysisRequest):
 @app.get("/health")
 async def health_check():
     """Detailed health check with service status."""
-    import os
-    
+
     return {
         "status": "healthy",
         "gemini_api_configured": bool(os.getenv("GEMINI_API_KEY")),

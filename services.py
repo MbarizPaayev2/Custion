@@ -3,8 +3,7 @@
 import os
 import re
 import logging
-import asyncio
-from typing import List, Dict, Set
+from typing import Any, Dict, List, Set
 from concurrent.futures import ThreadPoolExecutor
 from deep_translator import GoogleTranslator
 import google.generativeai as genai
@@ -30,7 +29,6 @@ class TextAnalysisService:
         self.known_words: Set[str] = KNOWN_WORDS
         # Use gemini-2.5-flash - newest, fastest, and free
         self.gemini_model = genai.GenerativeModel('gemini-2.5-flash')
-        self.executor = ThreadPoolExecutor(max_workers=2)
     
     def translate_to_azerbaijani(self, text: str) -> str:
         """
@@ -70,7 +68,7 @@ class TextAnalysisService:
         
         return sorted(unknown)
     
-    def generate_ai_analysis(self, text: str, unknown_words: List[str]) -> Dict[str, any]:
+    def generate_ai_analysis(self, text: str, unknown_words: List[str]) -> Dict[str, Any]:
         """
         Use FREE Gemini API to generate definitions for unknown terms and summary.
         OPTIMIZED: Shorter prompt, only unknown terms
@@ -153,7 +151,7 @@ Provide ONLY valid JSON (no markdown, no explanation):
             logger.error(f"Gemini AI error: {str(e)}")
             raise Exception(f"AI analysis failed: {str(e)}")
     
-    def analyze_text(self, text: str) -> Dict[str, any]:
+    def analyze_text(self, text: str) -> Dict[str, Any]:
         """
         Complete analysis pipeline for Security+ text.
         OPTIMIZED: Parallel execution for speed

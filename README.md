@@ -6,21 +6,24 @@ AI-powered FastAPI backend for Security+ exam preparation with Azerbaijani trans
 
 - **Azerbaijani Translation**: Automatic translation of Security+ technical content
 - **Vocabulary Analysis**: Identifies unknown technical terms using a known words hashmap
-- **A2-Level Definitions**: Simple English definitions for technical terms via Ollama AI
+- **A2-Level Definitions**: Simple Azerbaijani definitions for technical terms via Gemini AI
 - **Mini Notes**: Azerbaijani explanations of core concepts
 
 ## Setup
 
-### 1. Install Ollama (if not installed)
+### 1. Configure Gemini API Key
 
-Download and install from: https://ollama.ai/download
+Create or edit `.env` file:
 
-Then pull the model:
-```bash
-ollama pull llama3.2
+```env
+GEMINI_API_KEY=your_gemini_api_key
+ALLOWED_ORIGINS=http://localhost:8000
 ```
 
-### 2. Install Python Dependencies (WITHOUT Rust)
+- `GEMINI_API_KEY` is required for AI term definitions and mini notes.
+- `ALLOWED_ORIGINS` is optional. Use comma-separated values for multiple frontend origins.
+
+### 2. Install Python Dependencies
 
 **Windows:**
 ```bash
@@ -34,20 +37,13 @@ pip install --only-binary=:all: pydantic==2.6.4
 pip install -r requirements.txt
 ```
 
-### 3. Configure Environment
-
-Edit `.env` file:
-```
-OLLAMA_MODEL=llama3.2
-```
-
-### 4. Run the Application
+### 3. Run the Application
 
 ```bash
 python main.py
 ```
 
-The API will be available at `http://localhost:8000`
+The API and frontend will be available at `http://localhost:8000`
 
 ## API Endpoints
 
@@ -69,7 +65,7 @@ Analyze Security+ technical text.
   "vocabulary_list": [
     {
       "word": "firewall",
-      "a2_definition": "A tool that protects computers from bad internet connections"
+      "a2_definition": "Şəbəkəni zərərli girişdən qoruyan təhlükəsizlik sistemi"
     }
   ],
   "security_plus_mini_note": "Firewall anlayışı...",
@@ -82,16 +78,6 @@ Check API health and service status.
 
 ## Troubleshooting
 
-### Cargo/Rust Error
-
-If you get Rust/Cargo errors, use the pre-compiled installation:
-
-```bash
-pip install --only-binary=:all: pydantic pydantic-core
-```
-
-This installs pre-built wheels without requiring Rust compiler.
-
 ### Python Version
 
 - Recommended: Python 3.11 or 3.12
@@ -99,7 +85,7 @@ This installs pre-built wheels without requiring Rust compiler.
 
 ## Project Structure
 
-```
+```text
 .
 ├── main.py                    # FastAPI routes and app setup
 ├── services.py                # Business logic (translation, AI, vocabulary)
